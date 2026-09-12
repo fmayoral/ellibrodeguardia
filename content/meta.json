@@ -300,37 +300,43 @@
     "title": "Glasgow (GCS)",
     "category": "🧮 Calculadoras",
     "icon": "🧠",
-    "badge": "calc"
+    "badge": "calc",
+    "type": "calculator"
   },
   "calc-sofa": {
     "title": "SOFA Score",
     "category": "🧮 Calculadoras",
     "icon": "🦠",
-    "badge": "calc"
+    "badge": "calc",
+    "type": "calculator"
   },
   "calc-wells-tep": {
     "title": "Wells TEP",
     "category": "🧮 Calculadoras",
     "icon": "🩸",
-    "badge": "calc"
+    "badge": "calc",
+    "type": "calculator"
   },
   "calc-curb65": {
     "title": "CURB-65",
     "category": "🧮 Calculadoras",
     "icon": "🫁",
-    "badge": "calc"
+    "badge": "calc",
+    "type": "calculator"
   },
   "calc-heart": {
     "title": "HEART Score",
     "category": "🧮 Calculadoras",
     "icon": "❤️",
-    "badge": "calc"
+    "badge": "calc",
+    "type": "calculator"
   },
   "calc-chads": {
     "title": "CHA₂DS₂-VASc",
     "category": "🧮 Calculadoras",
     "icon": "🩺",
-    "badge": "calc"
+    "badge": "calc",
+    "type": "calculator"
   },
   "calc-nihss": {
     "title": "NIHSS",
@@ -348,25 +354,29 @@
     "title": "Wells TVP",
     "category": "💊 Referencia",
     "icon": "🧮",
-    "badge": "calc"
+    "badge": "calc",
+    "type": "calculator"
   },
   "calc-blatchford": {
     "title": "Score Blatchford",
     "category": "💊 Referencia",
     "icon": "🧮",
-    "badge": "calc"
+    "badge": "calc",
+    "type": "calculator"
   },
   "calc-sodio": {
     "title": "Corrección de sodio",
     "category": "💊 Referencia",
     "icon": "🧮",
-    "badge": "calc"
+    "badge": "calc",
+    "type": "calculator"
   },
   "drogas": {
     "title": "Drogas de emergencia",
     "category": "💊 Referencia",
     "icon": "💊",
     "sub": "80+ fármacos con dosis",
-    "badge": "ref"
+    "badge": "ref",
+    "type": "drugs"
   }
 }

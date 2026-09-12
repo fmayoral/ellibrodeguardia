@@ -8,6 +8,17 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const src = readFileSync(new URL('../../legacy-index.html', import.meta.url), 'utf8');
 
+// Of the 11 sidebar items badged "CALC", only 9 are actually interactive
+// point-scoring calculators (present in the `configs` map / use calcToggle
+// or calcCheck). calc-nihss and calc-psi are static reference tables with no
+// interactive elements at all — they get type:"module" (the default) so the
+// router treats them like any other content page instead of routing them
+// through the calculator engine.
+const INTERACTIVE_CALC_IDS = new Set([
+  'calc-gcs', 'calc-sofa', 'calc-wells-tep', 'calc-curb65', 'calc-heart',
+  'calc-chads', 'calc-wells-tvp', 'calc-blatchford', 'calc-sodio',
+]);
+
 // ── 1. Extract every VIEWS['id'] = `...`; block, in document order ──
 // Safe as a simple scan: verified separately that no `${}` interpolation or
 // stray backticks exist inside any VIEWS content block (all `${}` usage is
@@ -62,7 +73,8 @@ const sidebarOrder = [];
     let im;
     while ((im = itemRe.exec(body))) {
       const [, id, icon, title, sub, badge] = im;
-      sidebarMeta[id] = { title, category, icon, ...(sub ? { sub } : {}), ...(badge ? { badge } : {}) };
+      const type = INTERACTIVE_CALC_IDS.has(id) ? 'calculator' : id === 'drogas' ? 'drugs' : undefined;
+      sidebarMeta[id] = { title, category, icon, ...(sub ? { sub } : {}), ...(badge ? { badge } : {}), ...(type ? { type } : {}) };
       sidebarOrder.push(id);
     }
   }
@@ -94,8 +106,7 @@ writeFileSync(new URL('../../content/meta.json', import.meta.url), JSON.stringif
 console.log(`\nWrote content/meta.json with ${Object.keys(metaJson).length} entries.`);
 
 // ── 6. Write each module's content verbatim ──
-const calcIds = views.filter(v => v.id.startsWith('calc-')).map(v => v.id);
-const specialIds = new Set(['home', 'drogas', ...calcIds]);
+const calcIds = [...INTERACTIVE_CALC_IDS];
 
 mkdirSync(new URL('../../content/modules', import.meta.url), { recursive: true });
 mkdirSync(new URL('../../tools/migrate/intermediate', import.meta.url), { recursive: true });
