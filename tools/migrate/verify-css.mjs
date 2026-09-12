@@ -15,7 +15,7 @@ function chunks(css) {
     .sort();
 }
 
-const src = readFileSync(new URL('../../index.html', import.meta.url), 'utf8');
+const src = readFileSync(new URL('../../legacy-index.html', import.meta.url), 'utf8');
 const styleStart = src.indexOf('<style>') + '<style>'.length;
 const styleEnd = src.indexOf('</style>', styleStart);
 const original = src.slice(styleStart, styleEnd);
