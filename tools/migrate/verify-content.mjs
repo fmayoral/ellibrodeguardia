@@ -8,7 +8,9 @@ function stripTags(html) {
   return html
     .replace(/<!--[\s\S]*?-->/g, '')
     .replace(/<style[\s\S]*?<\/style>/g, '')
-    .replace(/<[^>]+>/g, ' ')
+    // Only well-formed tags (<tag ...> / </tag>) — plain "<45" / ">3×"
+    // comparison symbols are common in clinical text and must survive.
+    .replace(/<\/?[a-zA-Z][^>]*>/g, ' ')
     .replace(/&nbsp;/g, ' ')
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
