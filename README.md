@@ -89,26 +89,7 @@ Consultá el archivo LICENSE para los términos completos.
 
 ---
 
-## Desarrollo
-
-Estructura del proyecto:
-
-- `index.html` — shell de la app (sidebar, barra superior, buscador)
-- `css/` — estilos (tokens de tema, layout, componentes, responsive)
-- `content/` — el contenido real: un archivo por módulo clínico (`content/modules/`), por calculadora (`content/calculators/`) y por categoría de fármacos (`content/drugs/`), más `meta.json` con título/categoría/ícono de cada uno
-- `js/` — router, buscador, motor de calculadoras y demás lógica
-- `manifest.json` / `sw.js` — instalación como app y funcionamiento offline
-- `tools/` — scripts de desarrollo (servidor local, generación del service worker)
-
-Para previsualizar en local (no hace falta build ni instalar nada, solo Node):
-
-```
-node tools/dev-server.mjs
-```
-
-y abrir `http://localhost:8080`.
-
-Para agregar o editar un módulo clínico: crear/editar su archivo en `content/modules/` y agregar su entrada en `content/meta.json`. Después de agregar o quitar archivos, correr `node tools/generate-sw.mjs` para que el modo offline los incluya.
+Documentación técnica (estructura del proyecto, cómo previsualizar en local, cómo agregar un módulo): ver [DEVELOPMENT.md](./DEVELOPMENT.md).
 
 ---
 
