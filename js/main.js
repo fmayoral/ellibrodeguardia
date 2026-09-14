@@ -74,12 +74,40 @@ async function boot() {
 
 function initLangToggle() {
   const btn = document.getElementById('lang-btn');
+  const menu = document.getElementById('lang-menu');
   const current = LANGUAGES.find(l => l.code === lang) || LANGUAGES[0];
-  btn.textContent = current.label;
-  btn.addEventListener('click', () => {
-    const idx = LANGUAGES.findIndex(l => l.code === lang);
-    const next = LANGUAGES[(idx + 1) % LANGUAGES.length];
-    setLang(next.code);
+  btn.innerHTML = current.flagSvg;
+
+  menu.innerHTML = LANGUAGES.map(l => `
+    <div class="lang-menu-item${l.code === lang ? ' active' : ''}" data-lang="${l.code}">
+      <span class="lang-menu-flag">${l.flagSvg}</span>
+      <span>${l.name}</span>
+      ${l.code === lang ? '<span class="lang-menu-check">✓</span>' : ''}
+    </div>
+  `).join('');
+
+  const closeMenu = () => {
+    menu.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
+  };
+  const openMenu = () => {
+    menu.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+  };
+
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    if (menu.hidden) openMenu(); else closeMenu();
+  });
+  menu.addEventListener('click', e => {
+    const item = e.target.closest('.lang-menu-item');
+    if (item && item.dataset.lang !== lang) setLang(item.dataset.lang);
+  });
+  document.addEventListener('click', e => {
+    if (!menu.hidden && !e.target.closest('#lang-switch')) closeMenu();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !menu.hidden) closeMenu();
   });
 }
 
