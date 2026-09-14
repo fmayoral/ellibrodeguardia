@@ -6,9 +6,17 @@
 // simpler and more reliable than trying to hot-swap it all in place.
 const STORAGE_KEY = 'elg-lang';
 export const DEFAULT_LANG = 'es';
+
+// Inline SVG instead of flag emoji: Windows browsers commonly lack a font
+// with flag-emoji support and fall back to showing the raw two-letter
+// region code (e.g. "AR") instead of a flag, so we draw our own — small,
+// but renders identically on every platform.
+const FLAG_ES = '<svg viewBox="0 0 24 16" width="20" height="14" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="16" fill="#AA151B"/><rect y="4" width="24" height="8" fill="#F1BF00"/></svg>';
+const FLAG_BR = '<svg viewBox="0 0 24 16" width="20" height="14" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="16" fill="#009739"/><polygon points="12,2 22,8 12,14 2,8" fill="#FEDD00"/><circle cx="12" cy="8" r="3.3" fill="#012169"/></svg>';
+
 export const LANGUAGES = [
-  { code: 'es', label: 'ES', name: 'Español' },
-  { code: 'pt-BR', label: 'PT', name: 'Português (Brasil)' },
+  { code: 'es', flagSvg: FLAG_ES, name: 'Español' },
+  { code: 'pt-BR', flagSvg: FLAG_BR, name: 'Português (Brasil)' },
 ];
 
 export function getLang() {
